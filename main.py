@@ -12,7 +12,7 @@ app = Flask(__name__)
 db: FormalInterface = WorkWithDB()
 
 
-def send_message(chat_id: str, text: str) -> None:
+def send_message(chat_id: int, text: str) -> None:
     method: str = "sendMessage"
     token: str = get_from_env("TELEGRAM_BOT_TOKEN")
     url = f"https://api.telegram.org/bot{token}/{method}"
@@ -32,11 +32,9 @@ def get_answers() -> json:
     return question
 
 
-def get_result(chat_id: str) -> int:
+def get_result(chat_id: int) -> int:
     correct_answers: int = 0
     answer_arr: [] = db.range(f'{chat_id}')
-    answer_arr = [line.decode("utf-8").rstrip().lower() for line in answer_arr]
-    answer_arr = answer_arr[::-1]
     question: json = get_answers()
     for i in range(len(answer_arr)):
         if answer_arr[i] == question["questions"][i]["answer"]:
@@ -50,7 +48,8 @@ def receive_update() -> json:
         msg = request.get_json()
         chat_id = msg["message"]["chat"]["id"]
         question = get_answers()
-
+        # with open('./response.json', 'w', encoding='utf-8') as f:
+        #     json.dump(msg, f, indent=4)
         if request.json["message"]["text"] == "/start":
             if db.exist(f'{chat_id}'):
                 db.delete(f'{chat_id}')

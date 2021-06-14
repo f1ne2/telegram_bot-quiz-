@@ -1,0 +1,22 @@
+version: "3"
+
+services:
+  Redis:
+    image: redis:latest
+    volumes :
+    - "/usr/src/app"
+    ports:
+      - "6379:6379"
+    restart: always
+    network_mode: host
+  flask:
+    container_name: quizBot
+    restart: always
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "5000:5000"
+    depends_on:
+      - "Redis"
+    network_mode: host
