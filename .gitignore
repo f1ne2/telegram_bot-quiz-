@@ -1,0 +1,7 @@
+venv/*
+.env
+*.txt
+response.json
+__pycache__/*
+.idea/*
+bot/__pycache__/*

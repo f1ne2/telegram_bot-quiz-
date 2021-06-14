@@ -1,0 +1,24 @@
+{
+  "questions": [{
+    "question": "How many days in the year?",
+    "answer": "365"
+  },
+    {
+    "question": "How many hours in the year?",
+      "answer": "8760"
+  },
+    {
+    "question": "What planetary system we live in?",
+      "answer": "solar"
+  },
+    {
+    "question": "In what country were last summer Olympic games?",
+      "answer": "brazil"
+  },
+   {
+    "question": "In what country were last winter Olympic games?",
+     "answer": "south korea"
+  }]
+
+}
+
